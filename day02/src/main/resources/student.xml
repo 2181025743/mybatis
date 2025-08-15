@@ -45,4 +45,19 @@
         set age = #{age}
         where gender = #{gender}
     </update>
+    <select id="selectAllStudents" resultType="com.yx.model.Student">
+        select *
+        from student;
+    </select>
+    <select id="selectStudentById" resultType="com.yx.model.Student">
+        select *
+        from student
+        where id = #{id};
+    </select>
+    <select id="selectByCondition" parameterType="com.yx.model.Student" resultType="com.yx.model.Student">
+        SELECT *
+        FROM student
+        WHERE gender = #{gender}
+          AND age > #{age}
+    </select>
 </mapper>
