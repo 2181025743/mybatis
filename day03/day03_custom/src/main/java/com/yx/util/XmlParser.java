@@ -1,7 +1,6 @@
 package com.yx.util;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class XmlParser {
-    public static DbProfile parseXml(InputStream in) throws DocumentException {
+    public static DbProfile parseXml(InputStream in) throws Exception {
         DbProfile dbProfile = new DbProfile();
         SAXReader saxReader = new SAXReader();
         Document document = saxReader.read(in);
@@ -39,8 +38,6 @@ public class XmlParser {
                 statementMap.putAll(oneMapper);
             }
         }
-
-        // 5. 加入 profile 返回
         dbProfile.setMappers(statementMap);
         return dbProfile;
     }
