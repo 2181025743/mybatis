@@ -19,7 +19,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public int delete(int id) {
         SqlSession session = getSession();
-        int i = session.delete("delete", id);
+        int i = session.delete("deleteById", id);
         session.close();
         return i;
     }
@@ -27,7 +27,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public int update(Student student) {
         SqlSession session = getSession();
-        int i = session.update("update", student);
+        int i = session.update("updateStudentById", student);
         session.close();
         return i;
     }
@@ -35,7 +35,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> selectList() {
         SqlSession session = getSession();
-        List<Student> list = session.selectList("selectList");
+        List<Student> list = session.selectList("selectAllStudents");
         session.close();
         return list;
     }
@@ -43,7 +43,7 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public Student selectId(int id) {
         SqlSession session = getSession();
-        Student student = session.selectOne("selectById", id);
+        Student student = session.selectOne("selectStudentById", id);
         session.close();
         return student;
     }
