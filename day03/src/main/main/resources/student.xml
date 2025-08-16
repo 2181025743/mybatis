@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="student">
+    <insert id="insert">
+        insert into student
+        values (null, '王五', 20, '男');
+    </insert>
+    <insert id="insertObject" parameterType="com.yx.model.Student">
+        insert into student (name, age, gender)
+        values (#{name}, #{age}, #{gender});
+    </insert>
+    <insert id="insertTeacher" parameterType="com.yx.model.Teacher">
+        <selectKey resultType="int" keyProperty="id" keyColumn="id" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into teacher (name,addr) values (#{name},#{addr});
+    </insert>
+    <delete id="deleteById" parameterType="int">
+        delete
+        from student
+        where id = #{id};
+    </delete>
+    <delete id="deleteByName" parameterType="string">
+        delete
+        from student
+        where name = #{name}
+    </delete>
+    <delete id="deleteByLike3" parameterType="String">
+        delete
+        from student
+        where name like CONCAT('%', #{name}, '%')
+    </delete>
+    <update id="updateStudentById" parameterType="com.yx.model.Student">
+        update student
+        set name   = #{name},
+            age    = #{age},
+            gender = #{gender}
+        where id = #{id}
+    </update>
+    <update id="updateAgeByGender" parameterType="com.yx.model.Student">
+        update student
+        set age = #{age}
+        where gender = #{gender}
+    </update>
+    <select id="selectAllStudents" resultType="com.yx.model.Student">
+        select *
+        from student;
+    </select>
+    <select id="selectStudentById" resultType="com.yx.model.Student">
+        select *
+        from student
+        where id = #{id};
+    </select>
+    <select id="selectByCondition" parameterType="com.yx.model.Student" resultType="com.yx.model.Student">
+        SELECT *
+        FROM student
+        WHERE gender = #{gender}
+          AND age > #{age}
+    </select>
+</mapper>
