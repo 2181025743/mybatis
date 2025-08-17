@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>day03</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>day03_mapper</artifactId>
+    <packaging>jar</packaging>
 
-    <name>day03</name>
+    <name>day03_mapper</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -22,7 +22,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
-            <scope>compile</scope>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

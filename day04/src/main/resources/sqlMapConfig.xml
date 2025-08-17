@@ -13,15 +13,14 @@
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url"
-                          value="jdbc.url=jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="aA1472580@"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
-        <mapper resource="studentMapper.xml"/>
+        <mapper class="com.yx.mapper.StudentMapper"/>
     </mappers>
 </configuration>
