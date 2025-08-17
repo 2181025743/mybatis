@@ -28,27 +28,6 @@ public class XmlParser {
 
         saxReader.setValidation(false);
 
-        // 尝试设置各种可能禁用DTD的特性
-        try {
-            saxReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-        } catch (Exception e) {
-        }
-
-        try {
-            saxReader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-        } catch (Exception e) {
-        }
-
-        try {
-            saxReader.setFeature("http://xml.org/sax/features/external-general-entities", false);
-        } catch (Exception e) {
-        }
-
-        try {
-            saxReader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-        } catch (Exception e) {
-        }
-
         Document document = saxReader.read(in);
         Element root = document.getRootElement();
         List<Element> props = root.selectNodes("//property").stream()

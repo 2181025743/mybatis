@@ -22,5 +22,6 @@
     </environments>
     <mappers>
         <mapper class="com.yx.mapper.StudentMapper"/>
+        <mapper class="com.yx.mapper.TeacherMapper"/>
     </mappers>
 </configuration>
