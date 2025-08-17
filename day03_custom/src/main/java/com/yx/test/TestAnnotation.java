@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestAnnotation {
     public static void main(String[] args) {
-        InputStream inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
+        InputStream inputStream = Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(inputStream);
         SqlSession session = factory.openSession();
