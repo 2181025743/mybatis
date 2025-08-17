@@ -4,6 +4,12 @@ import java.io.InputStream;
 
 public class SqlSessionFactoryBuilder {
     public SqlSessionFactory build(InputStream in) {
-        return new CustomSqlSessionFactory(); // 目前先返回空实现
+        try {
+            DbProfile dbProfile = XmlParser.parseXml(in);
+            return new CustomSqlSessionFactory(dbProfile);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
