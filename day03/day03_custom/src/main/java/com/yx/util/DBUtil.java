@@ -49,8 +49,6 @@ public class DBUtil {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            close(rs, ps);
         }
 
         return list;

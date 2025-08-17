@@ -1,18 +1,33 @@
 package com.yx.util;
 
-import lombok.AllArgsConstructor;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-@AllArgsConstructor
+
 public class CustomSqlSession implements SqlSession {
-    private DbProfile dbProfile;
+    private DbProfile profile;
+    private Connection connection;
 
-    @Override
-    public <T> T getMapper(Class<T> mapperClass) {
-        return null;
+    public CustomSqlSession(DbProfile profile) {
+        this.profile = profile;
+        connection = DBUtil.getConnection(profile);
     }
 
     @Override
-    public void close() {
+    public <T> T getMapper(Class<T> mapperClass) {
+        return (T) Proxy.newProxyInstance(mapperClass.getClassLoader(),
+                new Class[]{mapperClass}, new ProxyImpl(profile.getMappers(), connection));
+    }
 
+    @Override
+    public void close() throws RuntimeException {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException throwables) {
+                throw new RuntimeException(throwables);
+            }
+        }
     }
 }
