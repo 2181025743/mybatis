@@ -16,6 +16,7 @@
         <!--        <module>day03_mapper</module>-->
         <!--        <module>day04</module>-->
         <module>day05</module>
+        <module>day05_practise</module>
     </modules>
 
     <properties>
