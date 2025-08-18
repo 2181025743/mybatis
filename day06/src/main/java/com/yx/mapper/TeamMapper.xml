@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yx.mapper.TeamMapper">
+    <resultMap id="oneToMany" type="team">
+        <id property="tid" column="tid"/>
+        <result property="tname" column="tname"/>
+        <collection property="players" ofType="Player">
+            <id property="pid" column="pid"/>
+            <result property="pname" column="pname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+    <select id="selectList" resultMap="oneToMany">
+        select *
+        from team t
+                 join player p on t.tid = p.tid;
+    </select>
+</mapper>
