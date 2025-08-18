@@ -12,4 +12,8 @@ public interface StudentMapper {
     boolean update(Student student);
 
     int deleteList(List<Integer> ids);
+
+    int insertBench(List<Student> list);
+
+    List<Student> selectByName(String name);
 }

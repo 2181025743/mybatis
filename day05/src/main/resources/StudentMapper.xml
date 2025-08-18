@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yx.mapper.StudentMapper">
+    <insert id="insertBench" parameterType="list">
+        insert into student
+        values
+        <foreach collection="list" separator="," item="student">
+                (null,#{student.name},#{student.age},#{student.gender})
+        </foreach>
+    </insert>
     <update id="update" parameterType="student">
         update student
         <!-- set name= #{name},
@@ -77,6 +84,13 @@
                 </otherwise>
             </choose>
         </trim>
+    </select>
+    <select id="selectByName" resultType="com.yx.model.Student" parameterType="string">
+        <bind name="condition" value="'%' + name + '%'"/>
+        SELECT * FROM student
+        <if test="name != null and name != ''">
+            WHERE name LIKE #{condition}
+        </if>
     </select>
 
 </mapper>

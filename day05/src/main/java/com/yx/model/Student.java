@@ -1,10 +1,14 @@
 package com.yx.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
-    private int id;
+    private Integer id;
     private String name;
     private int age;
     private String gender;
