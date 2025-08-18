@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/39b6575f-71b9-47aa-afb7-a7517d6a73b4/console.sql" value="39b6575f-71b9-47aa-afb7-a7517d6a73b4" />
+    <file url="file://$PROJECT_DIR$/day05/src/main/java/com/yx/mapper/StuMapper.java" value="39b6575f-71b9-47aa-afb7-a7517d6a73b4" />
     <file url="file://$PROJECT_DIR$/day05/src/main/resources/StudentMapper.xml" value="39b6575f-71b9-47aa-afb7-a7517d6a73b4" />
+    <file url="file://$PROJECT_DIR$/day05_practise/src/main/java/com/yx/mapper/EmployeeMapper.xml" value="39b6575f-71b9-47aa-afb7-a7517d6a73b4" />
   </component>
 </project>

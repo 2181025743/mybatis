@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yx.mapper.EmployeeMapper">
+    <insert id="insertBatch" parameterType="Employee">
+        insert into employee values
+        <foreach collection="list" item="emp" separator=",">
+                (null, #{emp.name}, #{emp.addr}, #{emp.age}, #{emp.job}, #{emp.sal})
+        </foreach>
+    </insert>
+    <update id="updateByCityBatch">
+        <bind name="cityPattern" value="'%' + city + '%'"/>
+        UPDATE employee
+        <set>
+            <if test="sal != null">
+                sal = #{sal},
+            </if>
+            <if test="job != null and job != ''">
+                job = #{job},
+            </if>
+        </set>
+        <where>
+            <if test="city != null and city != ''">
+                addr LIKE #{cityPattern}
+            </if>
+        </where>
+    </update>
+    <delete id="deleteByIds">
+        DELETE FROM employee
+        <where>
+            <if test="array != null and array.length > 0">
+                id IN
+                <foreach collection="array" item="id"
+                         open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
+    <select id="selectByCity" resultType="Employee" parameterType="string">
+        <bind name="city" value="'%'+city+'%'"/>
+        select * from employee
+        <where>
+            <if test="city !=null and city !=''">
+                addr like #{city}
+            </if>
+        </where>
+    </select>
+    <select id="avgSalaryByProvince" resultType="BigDecimal">
+        <bind name="provincePattern" value="_parameter + '%'"/>
+        SELECT AVG(sal) as avgSal
+        FROM employee
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                addr LIKE #{provincePattern}
+            </if>
+        </where>
+    </select>
+</mapper>
