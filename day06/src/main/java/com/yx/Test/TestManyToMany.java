@@ -4,9 +4,8 @@ package com.yx.Test;
 import com.yx.mapper.UsersMapper;
 import com.yx.model.Role;
 import com.yx.model.Users;
-import org.apache.ibatis.io.Resources;
+import com.yx.util.SessionUtil;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,9 +13,7 @@ import java.util.Scanner;
 
 public class TestManyToMany {
     public static void main(String[] args) throws IOException {
-        SqlSession session = new SqlSessionFactoryBuilder()
-                .build(Resources.getResourceAsStream("SqlMapConfig.xml"))
-                .openSession();
+        SqlSession session = SessionUtil.session(true);
 
         UsersMapper mapper = session.getMapper(UsersMapper.class);
         List<Users> list = mapper.selectList();

@@ -1,10 +1,9 @@
 package com.yx.mapper;
 
-import java.util.List;
 import com.yx.model.Users;
 
 public interface UsersMapper {
-    List<Users> selectList();
-
     Users login(Users user);
+
+    void updateLastLogin(Users user);
 }

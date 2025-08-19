@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yx.mapper.UsersMapper">
+
+    <resultMap id="userResult" type="Users" autoMapping="true">
+        <id property="uid" column="uid"/>
+        <collection property="roles" ofType="Role" autoMapping="true">
+            <id property="rid" column="rid"/>
+            <collection property="perms" ofType="Permission" autoMapping="true">
+                <id property="pid" column="pid"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="login" resultMap="userResult" parameterType="Users">
+        SELECT u.uid,
+               u.uname,
+               u.pwd,
+               u.lasttime,
+               r.rid,
+               r.rname,
+               p.pid,
+               p.pname,
+               p.url
+        FROM users u
+                 JOIN users_role ur ON u.uid = ur.uid
+                 JOIN role r ON ur.rid = r.rid
+                 JOIN role_permision rp ON r.rid = rp.rid
+                 JOIN permision p ON rp.pid = p.pid
+        WHERE u.uname = #{uname}
+          AND u.pwd = #{pwd}
+    </select>
+
+    <update id="updateLastLogin" parameterType="Users">
+        UPDATE users
+        SET lasttime = NOW()
+        WHERE uid = #{uid}
+    </update>
+
+</mapper>

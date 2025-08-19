@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yx.mapper.UsersMapper">
-    <resultMap id="usersQuery" type="users" autoMapping="true">
+    <resultMap id="usersQuery" type="com.yx.model.Users" autoMapping="true">
         <id column="uid" property="uid"/>
-        <collection property="roles" ofType="role" autoMapping="true"/>
+        <collection property="roles" ofType="com.yx.model.Role" autoMapping="true"/>
     </resultMap>
     <select id="selectList" resultMap="usersQuery">
         SELECT u.*, r.*
