@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yx.mapper.UsersMapper">
+    <resultMap id="usersQuery" type="users" autoMapping="true">
+        <id column="uid" property="uid"/>
+        <collection property="roles" ofType="role" autoMapping="true"/>
+    </resultMap>
+    <select id="selectList" resultMap="usersQuery">
+        SELECT u.*, r.*
+        FROM users u
+                 JOIN users_role ur ON u.uid = ur.uid
+                 JOIN role r ON ur.rid = r.rid
+    </select>
+    <select id="login" resultMap="usersQuery" parameterType="Users">
+        SELECT u.*, r.*
+        FROM users u
+                 JOIN users_role ur ON u.uid = ur.uid
+                 JOIN role r ON ur.rid = r.rid
+        WHERE u.uname = #{uname}
+          AND u.pwd = #{pwd}
+    </select>
+</mapper>
