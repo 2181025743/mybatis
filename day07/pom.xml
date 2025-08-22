@@ -8,10 +8,13 @@
     </parent>
 
     <artifactId>day07</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>day07</name>
     <url>http://maven.apache.org</url>
+    <modules>
+        <module>day07_lazyload</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

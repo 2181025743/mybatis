@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yx.mapper.PlayerMapper">
+    <resultMap id="x" type="player" autoMapping="true">
+        <association property="team" javaType="team" autoMapping="true"/>
+    </resultMap>
+    <select id="selectId" resultType="com.yx.model.Player" parameterType="integer">
+        select *
+        from player p
+                 join team t on p.pid = t.tid
+        where p.pid = #{pid};
+    </select>
+</mapper>
