@@ -7,7 +7,7 @@
     <resultMap id="x" type="player" autoMapping="true">
         <association property="team" javaType="team" autoMapping="true"/>
     </resultMap>
-    <select id="selectId" resultType="com.yx.model.Player" parameterType="integer">
+    <select id="selectId" resultType="com.yx.model.Player" parameterType="int">
         select *
         from player p
                  join team t on p.pid = t.tid
