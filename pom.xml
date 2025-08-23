@@ -21,6 +21,7 @@
         <module>day06_practice</module>
         <module>day07</module>
         <module>day07_PageHelper</module>
+        <module>day07_practice</module>
     </modules>
 
     <properties>
