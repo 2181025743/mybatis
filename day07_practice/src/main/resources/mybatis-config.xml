@@ -7,7 +7,8 @@
     <properties resource="db.properties"/>
 
     <settings>
-        <setting name="logImpl" value="LOG4J"/>
+        <!-- 改用 SLF4J 或者直接删除这行 -->
+        <setting name="logImpl" value="SLF4J"/>
     </settings>
 
     <!-- 配置分页插件 -->

@@ -9,51 +9,31 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
-    // 日志相关代码移除，改用System.err输出
     private static SqlSessionFactory sqlSessionFactory;
 
     static {
         try {
             String resource = "mybatis-config.xml";
-            // 调试：打印ClassLoader根路径
-            java.net.URL rootUrl = Test.class.getClassLoader().getResource("");
-            System.err.println("ClassLoader根路径: " + rootUrl);
-            // ���试：绝对路径文件是否存在
-            java.io.File file = new java.io.File("D:/project/java/mybatis_08_15/day07_practice/target/classes/mybatis-config.xml");
-            System.err.println("绝对路径文件是否存在: " + file.exists());
-            // 优先用ClassLoader加载
-            java.net.URL url = Test.class.getClassLoader().getResource(resource);
-            System.err.println("ClassLoader查找mybatis-config.xml结果: " + url);
             InputStream inputStream = Test.class.getClassLoader().getResourceAsStream(resource);
-            // 如果ClassLoader找不到，则尝试用绝对路径
-            if (inputStream == null && file.exists()) {
-                inputStream = new java.io.FileInputStream(file);
-                System.err.println("已用绝对路径加载mybatis-config.xml");
-            }
-            if (inputStream == null) {
-                throw new IOException("Could not find resource " + resource);
-            }
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("初始化SqlSessionFactory失败: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        // 初始化失败直接退出，避免空指针异常
         if (sqlSessionFactory == null) {
             System.err.println("SqlSessionFactory初始化失败，程序终止。");
             return;
         }
-        // 执行所有测试
+
         System.out.println("=== 2. 插入新数据 ===");
         insertEmployees();
 
@@ -66,6 +46,7 @@ public class Test {
         System.out.println("\n=== 5. 删除陕西省员工 ===");
         deleteShaanxiEmployees();
     }
+
 
     // 2. 插入数据
     public static void insertEmployees() {
